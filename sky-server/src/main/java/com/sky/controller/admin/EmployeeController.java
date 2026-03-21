@@ -95,11 +95,30 @@ public class EmployeeController {
      * @param employeePageQueryDTO
      * @return
      */
+
+    //GET:admin/employee/page
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
+    //查询类一般加<>，非查询类不用加，employeePageQueryDTO是从前端传过来的数据
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
         log.info("员工分页查询，参数为：{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);//后续定义
         return Result.success(pageResult);
     }
-}
+
+    /**
+     * 启用禁用员工账号
+     * @param status
+     * @param id
+     * @return
+     */
+
+    //POST:admin/employee/status/{status}
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用员工账号")
+    //前端传来status（路径参数前要加@PathVariable，id）
+    public Result startOrStop(@PathVariable Integer status,Long id){
+        log.info("启用禁用员工账号：{},{}",status,id);
+        employeeService.startOrStop(status,id);//后绪步骤定义
+        return Result.success();
+    }}
