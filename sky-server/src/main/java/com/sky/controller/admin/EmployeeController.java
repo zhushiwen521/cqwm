@@ -100,6 +100,7 @@ public class EmployeeController {
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
     //查询类一般加<>，非查询类不用加，employeePageQueryDTO是从前端传过来的数据
+    // <> 是泛型语法，作用是限定 Result 内部封装的核心数据类型；<PageResult> 表示这个 Result 对象承载的是分页结果（PageResult）类型的数据；
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO){
         log.info("员工分页查询，参数为：{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);//后续定义
