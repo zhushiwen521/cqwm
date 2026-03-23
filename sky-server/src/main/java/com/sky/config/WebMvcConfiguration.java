@@ -27,6 +27,7 @@ import java.util.List;
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
+
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 
@@ -68,11 +69,12 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        log.info("开始设置静态资源映射...");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        //配置好静态资源路径（有改动的地方）
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("file:C:/Users/25481/OneDrive/Desktop/cqwm/day1/sky-take-out/sky-server/src/main/resources/uploads/");
     }
-
     /**
      * 扩展Spring MVC框架的消息转化器
      * @param converters
